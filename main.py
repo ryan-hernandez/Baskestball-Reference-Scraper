@@ -11,9 +11,9 @@ class main:
         per_min = False
         _scraper = scraper.scraper()
 
-        year = 1950
+        year = 2018
         print("Creating .csv files...")
-        while year < 2020:
+        while year < 2021:
             _scraper.player_per_game_scraper(year, per_game, per_min)
             year += 1
             #time.sleep(1)
@@ -29,9 +29,9 @@ class main:
 
         _scraper = scraper.scraper()
 
-        year = 1950
+        year = 2018
         print("Creating .csv files...")
-        while year < 2020:
+        while year < 2021:
             _scraper.player_per_game_scraper(year, per_game, per_min)
             year += 1
             #time.sleep(1)
