@@ -15,9 +15,9 @@ class scraper:
 
         # URL to scrape
         if per_game:
-            quote_page = "https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_game.html"
+            quote_page = "https://www.basketball-reference.com/leagues/NBA_" + str(year).encode('utf-8') + "_per_game.html"
         elif per_min:
-            quote_page = "https://www.basketball-reference.com/leagues/NBA_" + str(year) + "_per_minute.html"
+            quote_page = "https://www.basketball-reference.com/leagues/NBA_" + str(year).encode('utf-8') + "_per_minute.html"
 
         # Parse page using BeautifulSoup and store in soup
         soup = self.make_soup(quote_page)
@@ -32,10 +32,10 @@ class scraper:
 
         if per_game:
             # Filename for .csv
-            filename = "data/per_game/player_per_game_stats_" + str(year) + ".csv"
+            filename = "data/per_game/player_per_game_stats_" + str(year).encode('utf-8') + ".csv"
         elif per_min:
             # Filename for .csv
-            filename = "data/per_min/player_per_min_stats_" + str(year) + ".csv"
+            filename = "data/per_min/player_per_min_stats_" + str(year).encode('utf-8') +".csv"
         
         # Writes data to .csv
         if per_game:
@@ -77,7 +77,7 @@ class scraper:
             player_cols = row.find_all("td")
             new_player_cols = []
             for ele in player_cols:
-                if not ele.text.strip():
+                if not ele.text.encode('utf-8').strip() or ele.text.strip() == "xe9":
                     new_player_cols.append(" ")
                 else: 
                     new_player_cols.append(ele.text.strip())
@@ -94,4 +94,8 @@ class scraper:
                     player_info = []
                     for stat in player:
                         player_info.append(stat)
-                    writer.writerow(player_info)
+                    try:
+                        writer.writerow(player_info)
+                    except UnicodeEncodeError as e:
+                        print(e.message)
+
