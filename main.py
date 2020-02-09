@@ -41,7 +41,7 @@ class main:
         print("Done!")
         
     year = 1950
-    print("Starting...")
+    print("Creating .csv data files...")
     while year < 2020:
         filename = "data/per_game/player_per_game_stats_" + str(year) + ".csv"
         season = Season.Season(filename)

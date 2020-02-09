@@ -98,4 +98,3 @@ class scraper:
                         writer.writerow(player_info)
                     except UnicodeEncodeError as e:
                         print(e.message)
-
